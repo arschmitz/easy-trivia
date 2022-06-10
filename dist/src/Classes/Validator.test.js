@@ -1,28 +1,26 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var Validator_1 = require("./Validator");
+import Validator from "./Validator";
 function createInstance(options) {
-    return new Validator_1.default(options);
+    return new Validator(options);
 }
-test("tests output of Validator.checkAmount()", function () {
-    var validator = createInstance({ amount: {} });
-    expect(function () {
+test("tests output of Validator.checkAmount()", () => {
+    let validator = createInstance({ amount: {} });
+    expect(() => {
         validator.checkAmount();
     }).toThrow(TypeError);
     validator = createInstance({ amount: true });
-    expect(function () {
+    expect(() => {
         validator.checkAmount();
     }).toThrow(TypeError);
     validator = createInstance({ amount: "" });
-    expect(function () {
+    expect(() => {
         validator.checkAmount();
     }).toThrow(TypeError);
     validator = createInstance({ amount: 0 });
-    expect(function () {
+    expect(() => {
         validator.checkAmount();
     }).toThrow(TypeError);
     validator = createInstance({ amount: 51 });
-    expect(function () {
+    expect(() => {
         validator.checkAmount();
     }).toThrow(TypeError);
     validator = createInstance({ amount: 25 });
@@ -34,25 +32,25 @@ test("tests output of Validator.checkAmount()", function () {
     validator = createInstance({ amount: null });
     expect(validator.checkAmount()).toEqual(null);
 });
-test("tests output of Validator.checkCategory()", function () {
-    var validator = createInstance({ category: {} });
-    expect(function () {
+test("tests output of Validator.checkCategory()", () => {
+    let validator = createInstance({ category: {} });
+    expect(() => {
         validator.checkCategory();
     }).toThrow(TypeError);
     validator = createInstance({ category: true });
-    expect(function () {
+    expect(() => {
         validator.checkCategory();
     }).toThrow(TypeError);
     validator = createInstance({ category: "..." });
-    expect(function () {
+    expect(() => {
         validator.checkCategory();
     }).toThrow(TypeError);
     validator = createInstance({ category: 8 });
-    expect(function () {
+    expect(() => {
         validator.checkCategory();
     }).toThrow(TypeError);
     validator = createInstance({ category: 33 });
-    expect(function () {
+    expect(() => {
         validator.checkCategory();
     }).toThrow(TypeError);
     validator = createInstance({ category: 25 });
@@ -76,33 +74,33 @@ test("tests output of Validator.checkCategory()", function () {
     validator = createInstance({ category: null });
     expect(validator.checkCategory()).toEqual(null);
 });
-test("tests output of Validator.checkDifficulty()", function () {
-    var validator = createInstance({
+test("tests output of Validator.checkDifficulty()", () => {
+    let validator = createInstance({
         difficulty: {},
     });
-    expect(function () {
+    expect(() => {
         validator.checkDifficulty();
     }).toThrow(TypeError);
     validator = createInstance({
         difficulty: true,
     });
-    expect(function () {
+    expect(() => {
         validator.checkDifficulty();
     }).toThrow(TypeError);
     validator = createInstance({ difficulty: "..." });
-    expect(function () {
+    expect(() => {
         validator.checkDifficulty();
     }).toThrow(TypeError);
     validator = createInstance({
         difficulty: 1,
     });
-    expect(function () {
+    expect(() => {
         validator.checkDifficulty();
     }).toThrow(TypeError);
     validator = createInstance({
         difficulty: "1",
     });
-    expect(function () {
+    expect(() => {
         validator.checkDifficulty();
     }).toThrow(TypeError);
     validator = createInstance({ difficulty: "easy" });
@@ -112,33 +110,33 @@ test("tests output of Validator.checkDifficulty()", function () {
     validator = createInstance({ difficulty: null });
     expect(validator.checkDifficulty()).toEqual(null);
 });
-test("tests output of Validator.checkEncoding()", function () {
-    var validator = createInstance({
+test("tests output of Validator.checkEncoding()", () => {
+    let validator = createInstance({
         encode: {},
     });
-    expect(function () {
+    expect(() => {
         validator.checkEncode();
     }).toThrow(TypeError);
     validator = createInstance({
         encode: true,
     });
-    expect(function () {
+    expect(() => {
         validator.checkEncode();
     }).toThrow(TypeError);
     validator = createInstance({ encode: "..." });
-    expect(function () {
+    expect(() => {
         validator.checkEncode();
     }).toThrow(TypeError);
     validator = createInstance({
         encode: 1,
     });
-    expect(function () {
+    expect(() => {
         validator.checkEncode();
     }).toThrow(TypeError);
     validator = createInstance({
         encode: "1",
     });
-    expect(function () {
+    expect(() => {
         validator.checkEncode();
     }).toThrow(TypeError);
     validator = createInstance({ encode: "base64" });
@@ -148,27 +146,27 @@ test("tests output of Validator.checkEncoding()", function () {
     validator = createInstance({ encode: null });
     expect(validator.checkEncode()).toEqual(null);
 });
-test("tests output of Validator.checkToken()", function () {
-    var validator = createInstance({
+test("tests output of Validator.checkToken()", () => {
+    let validator = createInstance({
         session: {},
     });
-    expect(function () {
+    expect(() => {
         validator.checkToken();
     }).toThrow(TypeError);
     validator = createInstance({
         session: true,
     });
-    expect(function () {
+    expect(() => {
         validator.checkToken();
     }).toThrow(TypeError);
     validator = createInstance({ session: "" });
-    expect(function () {
+    expect(() => {
         validator.checkToken();
     }).toThrow(TypeError);
     validator = createInstance({
         session: 1,
     });
-    expect(function () {
+    expect(() => {
         validator.checkToken();
     }).toThrow(TypeError);
     validator = createInstance({ session: "..." });
@@ -178,27 +176,27 @@ test("tests output of Validator.checkToken()", function () {
     validator = createInstance({ session: null });
     expect(validator.checkToken()).toEqual(null);
 });
-test("tests output of Validator.checkType()", function () {
-    var validator = createInstance({
+test("tests output of Validator.checkType()", () => {
+    let validator = createInstance({
         type: {},
     });
-    expect(function () {
+    expect(() => {
         validator.checkType();
     }).toThrow(TypeError);
     validator = createInstance({
         type: true,
     });
-    expect(function () {
+    expect(() => {
         validator.checkType();
     }).toThrow(TypeError);
     validator = createInstance({ type: "..." });
-    expect(function () {
+    expect(() => {
         validator.checkType();
     }).toThrow(TypeError);
     validator = createInstance({
         type: 1,
     });
-    expect(function () {
+    expect(() => {
         validator.checkType();
     }).toThrow(TypeError);
     validator = createInstance({ type: "boolean" });

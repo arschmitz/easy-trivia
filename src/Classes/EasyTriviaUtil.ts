@@ -1,4 +1,3 @@
-import { get } from "https";
 import { Question, QuestionOptions, RawQuestion } from "../Typings/interfaces";
 import {
   OpenTDBResponseCode,
@@ -54,7 +53,7 @@ export default class EasyTriviaUtil {
   ];
   public static questionTypes: QuestionType[] = ["multiple", "boolean"];
 
-  public static openTDBRequest(url: string) {
+  public static async openTDBRequest(url: string) {
     if (url === undefined)
       throw new EasyTriviaError(
         "'url' argument is required, received undefined",
@@ -66,37 +65,18 @@ export default class EasyTriviaUtil {
         "invalid_argument"
       );
 
-    return new Promise((resolve, reject) => {
-      let data = "";
-      const req = get(url, (res) => {
-        res.on("data", (chunk) => (data += chunk));
-        res.on("error", reject);
-        res.on("end", () => {
-          if (data.length > 0) {
-            try {
-              const body = JSON.parse(data);
-              const responseCode = (body?.response_code?.toString?.() ||
-                null) as OpenTDBResponseCode | null;
-              if (responseCode) {
-                if (responseCode > 0) throw new OpenTDBResponse(responseCode);
-              }
+    let response;
+    try {
+      response = await fetch(url);
+    } catch {
+      throw new EasyTriviaError(
+        "API responded with no data",
+        EasyTriviaError.errors.headers.EMPTY_RESPONSE
+      );
+    }
+    const data = await response.json();
 
-              resolve(body);
-            } catch (err) {
-              reject(err);
-            }
-          } else {
-            throw new EasyTriviaError(
-              "API responded with no data",
-              EasyTriviaError.errors.headers.EMPTY_RESPONSE
-            );
-          }
-        });
-      });
-
-      req.on("error", reject);
-      req.end();
-    });
+    return data;
   }
 
   public static shuffleArray<T>(arg: T[]): T[] {
@@ -124,7 +104,7 @@ export default class EasyTriviaUtil {
 
   public static base64Decoder = {
     atob(str: string) {
-      return Buffer.from(str, "base64").toString();
+      return atob(str);
     },
     decode(value: unknown): unknown {
       return value == null ||

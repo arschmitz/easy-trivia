@@ -19,13 +19,13 @@ export default class EasyTriviaUtil {
     static questionDifficulties: QuestionDifficulty[];
     static questionEncodings: QuestionEncoding[];
     static questionTypes: QuestionType[];
-    static openTDBRequest(url: string): Promise<unknown>;
+    static openTDBRequest(url: string): Promise<any>;
     static shuffleArray<T>(arg: T[]): T[];
     static base64Decoder: {
         atob(str: string): string;
         decode(value: unknown): unknown;
-        decodeString(str: string): string;
-        decodeStringArray(arr: string[]): unknown[];
+        decodeString(str: string): any;
+        decodeStringArray(arr: string[]): any[];
         decodeObjectValues(obj: object): any;
     };
     static finalizeOptions(options: QuestionOptions): QuestionOptions;
